@@ -1,0 +1,38 @@
+{
+    "name": "node-cache",
+    "version": "1.0.0",
+    "description": "In-memory node.js cache",
+    "keywords": [
+        "In-memory cache",
+        "javascript"
+    ],
+    "maintainers": [
+        {
+            "name": "Laurence Morin-Daoust",
+            "email": "laurence.morin.daoust@gmail.com"
+        }
+    ],
+    "repository":
+        {
+            "type": "git",
+            "url": "https://github.com/larryaubstore/node-cache"
+        }
+    ,
+    "dependencies": {
+      "underscore" : "1.6.0"
+    },
+    "devDependencies": {
+       "jasmine-node": "1.14.3"
+    },
+    "scripts": {
+        "test": "sudo jasmine-node test/spec",
+        "testdebug": "sudo node debug node_modules/jasmine-node/lib/jasmine-node/cli.js test/spec/"
+    },
+    "engines": [
+        "node >=0.6.x"
+    ],
+    "directories": {
+        "lib": "lib"
+    },
+    "main": "./lib/node-cache"
+}
