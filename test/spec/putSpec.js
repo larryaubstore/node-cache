@@ -18,7 +18,6 @@ describe("Put key/value/ranking tests", function () {
 
     expect(cache.status.memorysize).toEqual(12);
     expect(cache.cleanarray).toHaveBeenCalled();
-
     expect(cache.cleanarray.mostRecentCall.args[0]).toEqual(0);
 
   });
@@ -41,4 +40,23 @@ describe("Put key/value/ranking tests", function () {
     expect(cache.array["third"]).not.toBeUndefined();
     expect(cache.array["fourth"]).not.toBeUndefined();
   });
+
+  it("cleaning ratio test", function () {
+
+    var cache = new nodecache.Nodecache({maxsize: 100});
+
+    spyOn(cache, "cleanarray").andCallThrough();
+    cache.put(1000, "key", "keyvalue");
+    expect(cache.cleanarray).toHaveBeenCalled();
+    expect(cache.cleanarray.mostRecentCall.args[0]).toEqual(0);
+
+    cache.put(1000, "key2", "1234567890123456789012345678901");
+    expect(cache.cleanarray).toHaveBeenCalled();
+    expect(cache.cleanarray.mostRecentCall.args[0]).toEqual(0);
+
+    cache.put(1000, "key3", "1");
+    expect(cache.cleanarray).toHaveBeenCalled();
+    expect(cache.cleanarray.mostRecentCall.args[0]).toEqual(1);
+  });
+
 });
