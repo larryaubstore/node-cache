@@ -32,6 +32,17 @@ Node.js in-memory cache
 
 # Usage
 
+## Key definition
+
+  * key (string). 
+  * value (object).
+  * ranking (int). The ranking is used mainly for key deletion.
+
+## Options
+
+  * maxsize: Cache size.  
+  * toplistlimit: the bucket size is used for two list. The list who maintains the key with highest ranking and for list who contains the "candidates" elements are using the 'toplistlimit' option. 
+
 ## Cache instantiation 
 
 ```javascript
@@ -50,7 +61,7 @@ Node.js in-memory cache
 ## Get a key 
 
 ```javascript
-  var element = cache.get("akey");
   // element.ranking  => 1000 
   // element.value    => "keyvalue" 
+  var element = cache.get("akey");
 ```
