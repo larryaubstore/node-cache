@@ -119,5 +119,16 @@ describe("Put key/value/ranking tests", function () {
     expect(cache.toprequestkey["key1"]).toBeUndefined();
   });
 
+
+  it("Test 'addtoprequestkey' method is called", function () {
+    var cache  = new nodecache.Nodecache();
+
+    spyOn(cache, "addtoprequestkey").andCallThrough();
+    cache.put(1000, "akey", "avalue");
+
+    expect(cache.addtoprequestkey).toHaveBeenCalled();
+
+  });
+
 });
 
