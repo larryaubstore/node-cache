@@ -41,7 +41,7 @@ Node.js in-memory cache
 ## Options
 
   * maxsize: Cache size.  
-  * toplistlimit: the bucket size is used for two list. The list who maintains the key with highest ranking and for list who contains the "candidates" elements are using the 'toplistlimit' option. 
+  * toplistlimit: the bucket size is used for two list. The list who maintains the key with highest ranking and the list who contains the "candidates" are using the 'toplistlimit' option. 
 
 ## Cache instantiation 
 
