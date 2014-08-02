@@ -22,6 +22,28 @@ describe("Put key/value/ranking tests", function () {
 
   });
 
+
+  it("Add a key without ranking", function () {
+
+    var cache  = new nodecache.Nodecache();
+
+    cache.put("key", "keyvalue");
+
+    var element = cache.get("key");
+    expect(element).not.toBeUndefined();
+    expect(element.ranking).toEqual(1);
+    expect(element.value).toEqual("keyvalue");
+
+    cache.put("key", "keyvalue");
+    element = cache.get("key");
+    expect(element).not.toBeUndefined();
+    expect(element.ranking).toEqual(2);
+    expect(element.value).toEqual("keyvalue");
+
+
+
+  });
+
   it("cleanarray method test", function () {
 
     var cache = new nodecache.Nodecache();

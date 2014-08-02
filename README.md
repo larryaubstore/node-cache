@@ -58,6 +58,21 @@ Node.js in-memory cache
   cache.put(1000, "akey", "keyvalue");
 ```
 
+## Add a key (without ranking) 
+
+```javascript
+  // Insert a key with a rank value of 1000
+  cache.put("akey", "keyvalue");
+
+  var element = cache.get("akey");
+  element.ranking == 1;
+
+  cache.put("akey", "keyvalue");
+  element = cache.get("akey");
+  element.ranking == 2;
+
+```
+
 ## Get a key 
 
 ```javascript
