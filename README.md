@@ -47,7 +47,7 @@ Node.js in-memory cache
 
 ```javascript
 
-  var nodecache = require('./lib/node-cache');
+  var nodecache = require('node-cache');
   var cache = new nodecache.Nodecache({ maxsize: 1024 * 1024 * 100 });
 ```
 
