@@ -19,7 +19,8 @@
         }
     ,
     "dependencies": {
-      "underscore" : "1.6.0"
+      "underscore" : "1.6.0",
+      "redblack": "git://github.com/larryaubstore/redblack.js"
     },
     "devDependencies": {
        "jasmine-node": "1.14.2",
