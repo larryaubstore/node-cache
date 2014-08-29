@@ -94,7 +94,7 @@ describe("Put key/value/ranking tests", function () {
 
     expect(cache.get("key")).toBeDefined();
     expect(cache.get("key4")).toBeDefined();
-    expect(cache.redblack.count).toEqual(3);
+    expect(cache.redblack.count).toEqual(2);
 
 
 //    expect(cache.redblack.insert).toHaveBeenCalled();
