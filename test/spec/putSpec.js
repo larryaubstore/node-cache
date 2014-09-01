@@ -15,7 +15,7 @@ describe("Put key/value/ranking tests", function () {
 
     expect(element).not.toBeUndefined();
     expect(element.ranking).toEqual(1);
-    expect(element.value).toEqual("keyvalue");
+    expect(element.value).toEqual(["keyvalue"]);
 
     expect(cache.redblack.insert).toHaveBeenCalled();
     expect(cache.redblack.insert.calls[0].args[0]).toEqual(1);
@@ -36,7 +36,7 @@ describe("Put key/value/ranking tests", function () {
 
     expect(element).not.toBeUndefined();
     expect(element.ranking).toEqual(1);
-    expect(element.value).toEqual("keyvalue");
+    expect(element.value).toEqual(["keyvalue"]);
 
     expect(cache.redblack.insert).toHaveBeenCalled();
     expect(cache.redblack.insert.calls[0].args[0]).toEqual(1);
@@ -76,13 +76,13 @@ describe("Put key/value/ranking tests", function () {
     var element = cache.get("key");
     expect(element).not.toBeUndefined();
     expect(element.ranking).toEqual(2);
-    expect(element.value).toEqual("keyvalue");
+    expect(element.value).toEqual(["keyvalue", "keyvalue"]);
     expect(cache.redblack.count).toEqual(4);
 
     element = cache.get("key2");
     expect(element).not.toBeUndefined();
     expect(element.ranking).toEqual(1);
-    expect(element.value).toEqual("two");
+    expect(element.value).toEqual(["two"]);
 
     cache.put("key4", "four");
 

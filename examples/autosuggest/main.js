@@ -1,4 +1,4 @@
-var nodecrawler = require('nodecrawler');
+var nodecrawler = require('node-crawler');
 var nodecache = require('../../lib/node-cache');
 var cheerio = require('cheerio');
 
@@ -16,21 +16,18 @@ var sha256 = function(pwd) {
   return pwd;
 };
 
-var level0_1 = new nodecache.Nodecache({ maxsize: 26 });
-var level0_2 = new nodecache.Nodecache({ maxsize: 26 });
-var level0_3 = new nodecache.Nodecache({ maxsize: 26 });
 
 
-var level1 = new nodecache.Nodecache({ maxsize: 256 });
+var level1 = new nodecache.Nodecache({ limit: 256 });
 
 // 2 words combination
-var level2 = new nodecache.Nodecache({ maxsize: 256 });
+var level2 = new nodecache.Nodecache({ limit: 256 });
 
 // 4 words combination
-var level3 = new nodecache.Nodecache({ maxsize: 1024 });
+var level3 = new nodecache.Nodecache({ limit: 256 });
 
 // 8 words combination
-var level4 = new nodecache.Nodecache({ maxsize: 64 });
+var level4 = new nodecache.Nodecache({ limit: 256 });
 
 
 var chopsingleword = function(word) {
@@ -51,19 +48,8 @@ var putlevel0 = function(value1, value2, value3, value4, value5, value6, value7,
   
 };
 
-// MERKLE TREE
-var put = function (value1, value2, value3, value4, value5, value6, value7, value8) {
+var put = function (value1, value2, value3, value4, value5, value6, value7, value8, words) {
 
-//  var key000 = sha256(sha256(value1) + " " + sha256(value2));
-//  var key001 = sha256(sha256(value3) + " " + sha256(value4));
-//  var key010 = sha256(sha256(value5) + " " + sha256(value6));
-//  var key011 = sha256(sha256(value7) + " " + sha256(value8));
-//
-//  
-//  var key00 = sha256(sha256(key000) + " " + sha256(key001));
-//  var key01 = sha256(sha256(key010) + " " + sha256(key011));
-//
-//  var key0 = sha256(sha256(key00) + " " + sha256(key01));
 
   var value = " ";
 
@@ -76,19 +62,24 @@ var put = function (value1, value2, value3, value4, value5, value6, value7, valu
   var key00 = (key000) + " " + (key001);
   var key01 = (key010) + " " + (key011);
 
-  var key0 = (key00) + " " + (key01));
+  var key0 = (key00) + " " + (key01);
 
-  level1.put(value000, value);
-  level1.put(value001, value);
-  level1.put(value010, value);
-  level1.put(value011, value);
 
-  level2.put(key00, value);
-  level2.put(key01, value);
+  console.log(key000);
+  console.log(words);
+  console.log("\n");
+  level1.put(key000, words);
+  level1.put(key001, words);
+  level1.put(key010, words);
+  level1.put(key011, words);
 
-  level3.put(key0, value);
+  level2.put(key00, words);
+  level2.put(key01, words);
 
-  putlevel0(value1, value2, value3, value4, value5, value6, value7, value8);
+  level3.put(key0, words);
+
+
+  //putlevel0(value1, value2, value3, value4, value5, value6, value7, value8);
 };
 
 
@@ -103,13 +94,22 @@ var crawler = new nodecrawler.Crawler({
         html = $.html();
 
         words = html.split(/\s/g);
+        var begin;
+        var count = 0;
 
         for(var i = 0; i < words.length - 8; i++) {
 
+          count = count + words[i].length + 1;
+          
+          begin = '', end = '';
+          if(count >= 10) {
+            begin = count - 10;
+          } else {
+            begin = 0;
+          }
+
+          put(words[i], words[i+1], words[i+2], words[i+3], words[i+4], words[i+5], words[i+6], words[i+7], words[i+8], html.substr(begin, 20));
         }
-        
-        
-        
       }
     }
   });
