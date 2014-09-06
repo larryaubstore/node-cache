@@ -77,11 +77,8 @@ describe("Put key/value/ranking tests", function () {
 
   });
 
-
-
-
-
-
-
-
+  it("test reserved array index", function () {
+    var cache  = new nodecache.Nodecache({limit: 6});
+    expect(typeof(cache.get("pop"))).toEqual("undefined");
+  });
 });
