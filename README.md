@@ -32,14 +32,7 @@ Node.js in-memory cache
   var cache = new nodecache.Nodecache({ limit: 100 });
 ```
 
-## Add a key 
-
-```javascript
-  // Insert a key with a rank value of 1000
-  cache.put(1000, "akey", "keyvalue");
-```
-
-## Add a key (without ranking) 
+## Add a key
 
 ```javascript
   // Insert a key with a rank value of 1000
@@ -51,7 +44,6 @@ Node.js in-memory cache
   cache.put("akey", "keyvalue");
   element = cache.get("akey");
   element.ranking == 2;
-
 ```
 
 ## Get a key 
@@ -61,3 +53,15 @@ Node.js in-memory cache
   // element.value    => "keyvalue" 
   var element = cache.get("akey");
 ```
+
+
+## Add a key with a specific ranking
+
+***Not implemented yet***
+
+```javascript
+  // Insert a key with a rank value of 1000
+  cache.put(1000, "akey", "keyvalue");
+```
+
+
